@@ -7,7 +7,7 @@
               <button class="comment-add-button" @click="save">댓글추가</button>
             </div>
             <div class="comment-list-container">
-              <p v-for="commnet in comment_list" :key="commnet.id" class="upload-name">{{commnet.comment}}</p>
+              <p v-for="commnet in comment_list" :key="commnet.id" class="comment-list">{{commnet.comment}}</p>
             </div>
           </div>
           <p>{{message}}</p>
@@ -47,9 +47,7 @@ async function fetchData(){
     message.value = "completed get comment_list";
   } catch (error) {
     error_state.value = error;
-  } finally {
-    loading.value = false;
-  }
+  } 
 }
 
 async function updateData(){
@@ -63,9 +61,7 @@ async function updateData(){
     if(error.response.status == 400)
       message.value = error.response.data.error;
       error_state.value = error;
-  } finally {
-    loading.value = false;
-  }
+  } 
 }
 
 onMounted(()=>{
@@ -84,12 +80,6 @@ onMounted(()=>{
   margin-top: 60px;
   display: flex; /*Flexbox 레이아웃 사용 */
   justify-content: center; /* 가로로 가운데 정렬 */
-}
-
-.save_load_Btn{
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 .comment-container{
@@ -123,7 +113,7 @@ onMounted(()=>{
   margin: 10px;
 }
 
-.comment-container .upload-name {
+.comment-container .comment-list {
   display: inline-block;
   height: 20px;
   margin: 5px;
@@ -139,39 +129,6 @@ onMounted(()=>{
   display: flex;
   align-items: center;      /* 상하 가운데 정렬 */
   justify-content: flex-start; /* 왼쪽 정렬 */
-}
-
-.comment-container label {
-  display: inline-block;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #999999;
-  cursor: pointer;
-  height: 20px;
-  font-size: 15px;
-  margin-left: 10px;
-}
-
-.comment-container input[type="file"] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
-
-.upload_download button{
-  display: inline-block;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #999999;
-  cursor: pointer;
-  height: 40px;
-  width: 230px;
-  font-size: 20px;
-  margin-left: 10px;
-  border: hidden;
 }
 
 </style>

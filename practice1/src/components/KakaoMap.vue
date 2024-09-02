@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import {ref} from "vue"
 import axios from 'axios'
 export default ({
     /* global kakao */
@@ -72,8 +71,7 @@ export default ({
             this.loading = false;
             const script = document.createElement("script");
             script.type = "text/javascript";
-            const key = process.env.VUE_APP_KAKAO_API_KEY;
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=clusterer";
+            script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.VUE_APP_KAKAO_API_KEY}&autoload=false&libraries=clusterer`;
             document.head.appendChild(script);
             script.onload = () => kakao.maps.load(this.loadMap);
         },
