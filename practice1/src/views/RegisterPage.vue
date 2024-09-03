@@ -1,24 +1,22 @@
 <template>
-  <div id="container">
-    <div id="countingBtn">
-        <form>
-            <div class="login_info_container">
-              <label>ID</label>
-              <input v-model="id" type="text" :style="{ textAlign: 'right', width: '300px'}" >
-            </div>
-            <div class="login_info_container">
-              <label>PASS</label>
-              <input v-model="password" type="password" :style="{ textAlign: 'right', width: '300px' }" >
-            </div>
-            <div>
-                <button class="save_load_Btn" @click="resigerBtn">Sign Up</button>
-                <button class="save_load_Btn" @click="longinBtn">Login</button>
-            </div>
-            <div>
-                <p>{{message}}</p>
-            </div>
-        </form>
-    </div>
+  <div id="register-wrapper">
+    <form>
+        <div class="login_info_container">
+          <label>ID</label>
+          <input v-model="id" type="text" :style="{ textAlign: 'right', width: '300px'}" >
+        </div>
+        <div class="login_info_container">
+          <label>PASS</label>
+          <input v-model="password" type="password" :style="{ textAlign: 'right', width: '300px' }" >
+        </div>
+        <div>
+            <button class="save_load_Btn" @click="resigerBtn">Sign Up</button>
+            <button class="save_load_Btn" @click="longinBtn">Login</button>
+        </div>
+        <div>
+            <p>{{message}}</p>
+        </div>
+    </form>
   </div>
 </template>
 
@@ -77,7 +75,7 @@ async function login(){
 </script>
 
 <style scoped>
-#container {
+#register-wrapper {
   display: flex;
   justify-content: center; /* 수평 중앙 정렬 */
 }

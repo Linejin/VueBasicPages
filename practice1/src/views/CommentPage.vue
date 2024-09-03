@@ -1,5 +1,5 @@
 <template>
-    <div id="boxes">
+    <div id="comment-wrapper">
         <form>
           <div class="comment-container">
             <div>
@@ -71,7 +71,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-#boxes {
+#comment-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,24 +1,16 @@
-# my-vue-app
+# VueBasicPages
 
-## Project setup
-```
-npm install
-```
+## Description
+기본적인 vue page들을 구현한 프로젝트
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Environment
+- OS : Windows or Linux
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Setup
+- Server를 구성하고 실행한 후 Client를 실행
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Client
+[VUE](practice1\README.md)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Server
+[Django](practice1_backend\README.md)

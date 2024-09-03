@@ -1,7 +1,7 @@
 <template>
-    <div id="boxes">
-        <form>
-          <div class="profile-container">
+    <div id="imageupload-wrapper">
+        <form v-if="loading">
+          <div class="image-container">
               <img :src="imageURL">
           </div>
           <div class="imageuploader-container">
@@ -24,7 +24,7 @@ import { ref,onMounted } from 'vue';
 import axios from 'axios'
 
 const error_state = ref(null);
-const loading = ref(true)
+const loading = ref(false);
 const file = ref(null);
 const BaseImageURL = 'assets/images.jpg';
 const imageURL = ref(BaseImageURL);
@@ -41,14 +41,14 @@ const save = () => {
 
 async function fetchData(){
   try {
-    const response = await axios.get('http://127.0.0.1:8000/api/profile/recent/');
+    const response = await axios.get('http://127.0.0.1:8000/api/image/recent/');
     message.value = "최근 업로드된 이미지 이름 : " + response.data.name;
     imageURL.value = 'http://127.0.0.1:8000/media/' + response.data.name;
   } catch (error) {
     imageURL.value = BaseImageURL;
     error_state.value = error;
   } finally {
-    loading.value = false;
+    loading.value = true;
     file.value = null;
   }
 }
@@ -57,7 +57,7 @@ async function updateData(){
   try {
     const formData = new FormData();
     formData.append('file', file.value)
-    const response = await axios.post('http://127.0.0.1:8000/api/profile/', formData, {
+    const response = await axios.post('http://127.0.0.1:8000/api/image/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -65,12 +65,8 @@ async function updateData(){
     message.value = "업로드된 이미지 파일 이름 : " + response.data.name;
     imageURL.value = 'http://127.0.0.1:8000/media/' + response.data.name;
   } catch (error) {
-    if(error.response.status == 400)
-      message.value = error.response.data.error;
-    error_state.value = error;
     imageURL.value = BaseImageURL;
   } finally {
-    loading.value = false;
     file.value = null;
   }
 }
@@ -82,7 +78,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-#boxes {
+#imageupload-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -91,16 +87,6 @@ onMounted(()=>{
   margin-top: 60px;
   display: flex; /*Flexbox 레이아웃 사용 */
   justify-content: center; /* 가로로 가운데 정렬 */
-}
-.profile-container{
-  
-}
-.save_load_Btn{
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.imageuploader-container{
 }
 .imageuploader-container p {
   display: flex;

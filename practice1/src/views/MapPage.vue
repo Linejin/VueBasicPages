@@ -1,5 +1,5 @@
 <template>
-    <div id="mapPage">
+    <div id="mapPage-wrapper">
         <form>
           <div class="map-container">
             <div>
@@ -54,7 +54,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-#mapPage {
+#mapPage-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

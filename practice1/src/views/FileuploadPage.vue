@@ -1,5 +1,5 @@
 <template>
-    <div id="boxes">
+    <div id="fileupload-wrapper">
         <form>
           <div class="fileuploader-container">
               <p class="upload-name">{{file?.name}}</p>
@@ -114,7 +114,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-#boxes {
+#fileupload-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -123,11 +123,6 @@ onMounted(()=>{
   margin-top: 60px;
   display: flex; /*Flexbox 레이아웃 사용 */
   justify-content: center; /* 가로로 가운데 정렬 */
-}
-.save_load_Btn{
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 .fileuploader-container{
   width: 600px;

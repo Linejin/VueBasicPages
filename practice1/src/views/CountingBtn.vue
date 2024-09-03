@@ -1,5 +1,5 @@
 <template>
-    <div id="countingBtn">
+    <div id="countingBtn-wrapper">
         <form>
             <input v-model="cnt" type="number" @input="filterInput" :style="{ textAlign: 'right' }" >
             <button @click="inc">Counting Button</button>
@@ -70,7 +70,7 @@ async function updateData(){
 </script>
 
 <style scoped>
-#countingBtn {
+#countingBtn-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
