@@ -24,13 +24,14 @@ export default {
 const routing_links = [
   {to:"/", text:"Home"},
   {to:"/popup", text:"Popup"},
-  {to:"/countingBtn", text:"CountingBtn"},
+  {to:"/counting", text:"CountingBtn"},
   {to:"/inputBoxes", text:"InputBoxes"},
-  {to:"/fileuploadPage", text:"FileuploadPage"},
-  {to:"/registerPage", text:"RegisterPage"},
-  {to:"/imageuploadPage", text:"ImageuploadPage"},
-  {to:"/commentPage", text:"CommentPage"},
-  {to:"/mapPage", text:"MapPage"},
+  {to:"/fileupload", text:"FileuploadPage"},
+  {to:"/register", text:"RegisterPage"},
+  {to:"/imageupload", text:"ImageuploadPage"},
+  {to:"/comment", text:"CommentPage"},
+  {to:"/map", text:"MapPage"},
+  {to:"/lifecycle", text:"LifecyclePage"},
 ];
 
 

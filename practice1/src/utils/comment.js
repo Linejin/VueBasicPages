@@ -35,8 +35,7 @@ export async function updateComment(id, comment){
 
 export async function deleteComment(id){
     try {
-        const response = await axios.delete('http://localhost:8000/api/comment/'+id+'/');
-        const element = response.data;
+        await axios.delete('http://localhost:8000/api/comment/'+id+'/');
     } catch (error) {
         console.error(error)
     } 

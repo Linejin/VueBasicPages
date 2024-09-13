@@ -1,18 +1,18 @@
 <template>
-    <div id="mapPage-wrapper">
-        <form>
-          <div class="map-container">
-            <div>
-              <button class="map-add-button" @click="homeTab">Home</button>
-              <button class="map-add-button" @click="mapTab">Map</button>
-            </div>
-          </div>
-        </form>
+  <div id="mapPage-wrapper">
+    <form>
+      <div class="map-container">
         <div>
-          <kakaoMap v-if="state_home"></kakaoMap>
-          <div v-else >wellcome!</div>
+          <button class="map-add-button" @click="homeTab">Home</button>
+          <button class="map-add-button" @click="mapTab">Map</button>
         </div>
+      </div>
+    </form>
+    <div>
+      <kakaoMap v-if="state_home"></kakaoMap>
+      <div v-else >wellcome!</div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -31,25 +31,18 @@ export default {
 </script>
 
 <script setup>
-import { ref,onMounted } from 'vue';
+import { ref } from 'vue';
 const kakaoMap = ref(null);
 const state_home = ref(false);
 
 const homeTab = (event) => {
   event.preventDefault();
-  // updateData();
   state_home.value = false;
 };
 const mapTab = (event) => {
   event.preventDefault();
-  // updateData();
   state_home.value = true;
 };
-
-
-onMounted(()=>{
-  // initKakaoMap(kakaoMap.value); // Kakao Map 초기화
-});
 
 </script>
 

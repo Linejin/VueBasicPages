@@ -1,31 +1,31 @@
 <template>
-    <div id="inputboxes-wrapper">
-        <form>
-          <div class="boxes_container">
-            <div class="selector_container">
-              <select v-model="listboxes_selectedOption" name="options" @input="save" :style="{ width: '200px !important', margin: '5px', textAlign: 'right' }" >
-                <option v-for="item in listboxes_items" :key="item.id" :value="item.text">{{item.text}}</option>
-              </select>
-            </div>
-            <div class="custom-selector-container" @click="isOpen">
-              <span class="custom-selector-value"> {{listboxes_selectedOption}} </span>
-              <ul v-if="selectbox_item_display" class="custom-selector-item-container" >
-                <li class="custom-selector-item" v-for="item in listboxes_items" :key="item.id" @click="onClick_option(item.text)">
-                  <input :id="item.id" :value="item.text" readonly>
-                  <label :for="item.id"></label>
-                </li>
-              </ul>
-            </div>
-            <div class="toggle-container">
-              <div  class="toggle-pill-color" v-for="item in checkboxes_items" :key="item.id" >
-                <input type="checkbox" v-model="checkboxes_selectedOption" :value="item.text" @input="save" :id="item.id">
-                <label :for="item.id"></label>
-                <span>{{item.text}}</span>
-              </div>
-            </div>
+  <div id="inputboxes-wrapper">
+    <form>
+      <div class="boxes_container">
+        <div class="selector_container">
+          <select v-model="listboxes_selectedOption" name="options" @input="save" :style="{ width: '200px !important', margin: '5px', textAlign: 'right' }" >
+            <option v-for="item in listboxes_items" :key="item.id" :value="item.text">{{item.text}}</option>
+          </select>
+        </div>
+        <div class="custom-selector-container" @click="isOpen">
+          <span class="custom-selector-value"> {{listboxes_selectedOption}} </span>
+          <ul v-if="selectbox_item_display" class="custom-selector-item-container" >
+            <li class="custom-selector-item" v-for="item in listboxes_items" :key="item.id" @click="onClick_option(item.text)">
+              <input :id="item.id" :value="item.text" readonly>
+              <label :for="item.id"></label>
+            </li>
+          </ul>
+        </div>
+        <div class="toggle-container">
+          <div  class="toggle-pill-color" v-for="item in checkboxes_items" :key="item.id" >
+            <input type="checkbox" v-model="checkboxes_selectedOption" :value="item.text" @input="save" :id="item.id">
+            <label :for="item.id"></label>
+            <span>{{item.text}}</span>
           </div>
-        </form>
-    </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup>
@@ -70,29 +70,29 @@ const save = (event) => {
 };
 
 async function fetchData(){
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/boxes/1/');
-        listboxes_selectedOption.value = response.data.listbox || "a";
-        checkboxes_selectedOption.value = response.data.checkbox ? response.data.checkbox.split(',') : [];
-      } catch (error) {
-        error_state.value = error;
-      } finally {
-        loading.value = false;
-      }
+  try {
+    const response = await axios.get('http://127.0.0.1:8000/api/boxes/1/');
+    listboxes_selectedOption.value = response.data.listbox || "a";
+    checkboxes_selectedOption.value = response.data.checkbox ? response.data.checkbox.split(',') : [];
+  } catch (error) {
+    error_state.value = error;
+  } finally {
+    loading.value = false;
+  }
 }
 
 async function updateData(){
-      try {
-        const updatedData = {
-          "listbox": listboxes_selectedOption.value,
-          "checkbox": checkboxes_selectedOption.value.join(',')
-        }
-        const response = await axios.put('http://127.0.0.1:8000/api/boxes/1/', updatedData);
-      } catch (error) {
-        error_state.value = error;
-      } finally {
-        loading.value = false;
-      }
+  try {
+    const updatedData = {
+      "listbox": listboxes_selectedOption.value,
+      "checkbox": checkboxes_selectedOption.value.join(',')
+    }
+    await axios.put('http://127.0.0.1:8000/api/boxes/1/', updatedData);
+  } catch (error) {
+    error_state.value = error;
+  } finally {
+    loading.value = false;
+  }
 }
 
 

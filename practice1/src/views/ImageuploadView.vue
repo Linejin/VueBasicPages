@@ -1,16 +1,16 @@
 <template>
-    <div id="imageupload-wrapper">
-        <form v-if="loading">
-          <div class="image-container">
-              <img :src="imageURL">
-          </div>
-          <div class="imageuploader-container">
-            <label for="file">파일찾기</label> 
-            <input type="file" id="file" @input="handleFileChange">
-          </div>
-          <p>{{message}}</p>
-        </form>
-    </div>
+  <div id="imageupload-wrapper">
+    <form v-if="loading">
+      <div class="image-container">
+        <img :src="imageURL">
+      </div>
+      <div class="imageuploader-container">
+        <label for="file">파일찾기</label> 
+        <input type="file" id="file" @input="handleFileChange">
+      </div>
+      <p>{{message}}</p>
+    </form>
+  </div>
 </template>
 
 <script setup>

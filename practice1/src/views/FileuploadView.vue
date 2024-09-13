@@ -1,18 +1,18 @@
 <template>
-    <div id="fileupload-wrapper">
-        <form>
-          <div class="fileuploader-container">
-              <p class="upload-name">{{file?.name}}</p>
-              <label for="file">파일찾기</label> 
-              <input type="file" id="file" @input="handleFileChange">
-          </div>
-          <div class="upload_download">
-            <button @click="save">upload</button>
-            <button @click="load">download</button>
-          </div>
-          <p>{{message}}</p>
-        </form>
-    </div>
+  <div id="fileupload-wrapper">
+    <form>
+      <div class="fileuploader-container">
+        <p class="upload-name">{{file?.name}}</p>
+        <label for="file">파일찾기</label> 
+        <input type="file" id="file" @input="handleFileChange">
+      </div>
+      <div class="upload_download">
+        <button @click="save">upload</button>
+        <button @click="load">download</button>
+      </div>
+      <p>{{message}}</p>
+    </form>
+  </div>
 </template>
 
 <script setup>

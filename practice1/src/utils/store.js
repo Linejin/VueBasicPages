@@ -44,7 +44,7 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       try {
         const csrftoken = VueCookies.get('csrftoken');
-        const response = await axios.post('http://localhost:8000/api/logout/', {}, {
+        await axios.post('http://localhost:8000/api/logout/', {}, {
             withCredentials: true,  // 쿠키와 함께 요청을 보냄
             headers: {
               'X-CSRFToken': csrftoken,  // 헤더에 CSRF 토큰 추가

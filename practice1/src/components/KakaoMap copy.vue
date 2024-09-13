@@ -72,13 +72,13 @@ export default ({
         async function fetchData(){
             return await axios.get('http://127.0.0.1:8000/api/map/marker/1/')
                 .then((response) => { return {"latitude": response.data.latitude, "longitude": response.data.longitude}})
-                .catch((response) => {return null});
+                .catch(() => {return null});
         }
         async function updateData(latitude, longitude){
             const data = {"latitude": latitude, "longitude": longitude};
             return await axios.put('http://127.0.0.1:8000/api/map/marker/1/', data)
-                .then((response) => {return true})
-                .catch((response) => {return false});
+                .then(() => {return true})
+                .catch(() => {return false});
         }
         onMounted(() => {
             try{

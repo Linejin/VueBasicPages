@@ -9,10 +9,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios'
 import {useAuthStore} from '@/utils/store'
 
-const error_state = ref(null);
 const message = ref("");
 const authStore = useAuthStore()
 

@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import axios from 'axios';
-import PopupParent from '../views/PopupParent.vue'
-import CountingBtn from '../views/CountingBtn.vue'
-import HomePage from '../views/HomePage.vue'
-import InputBoxes from '../views/InputBoxes.vue'
-import FileuploadPage from '../views/FileuploadPage.vue'
-import RegisterPage from '../views/RegisterPage.vue'
-import ImageuploadPage from '../views/ImageuploadPage.vue'
-import CommentPage from '../views/CommentPage.vue'
-import MapPage from '../views/MapPage.vue'
-import LoginComponent from '@/components/LoginComponent.vue';
-import LogoutComponent from '@/components/LogoutComponent.vue';
+import PopupParent from '@/views/PopupParent'
+import CountingView from '@/views/CountingView'
+import HomeView from '@/views/HomeView'
+import InputBoxesView from '@/views/InputBoxesView'
+import FileuploadView from '@/views/FileuploadView'
+import RegisterView from '@/views/RegisterView'
+import ImageuploadView from '@/views/ImageuploadView'
+import CommentView from '@/views/CommentView'
+import MapView from '@/views/MapView'
+import LifecycleView from '@/views/LifecycleView'
+import LogoutComponent from '@/components/LogoutComponent';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomePage,
+    component: HomeView,
   },
   {
     path: '/popup',
@@ -24,47 +24,52 @@ const routes = [
     component: PopupParent,
   },
   {
-    path: '/countingBtn',
-    name: 'countingBtn',
-    component: CountingBtn,
+    path: '/counting',
+    name: 'counting',
+    component: CountingView,
   },
   {
     path: '/inputBoxes',
     name: 'inputBoxes',
-    component: InputBoxes,
+    component: InputBoxesView,
   },
   {
-    path: '/fileuploadPage',
-    name: 'fileuploadPage',
-    component: FileuploadPage,
+    path: '/Fileupload',
+    name: 'Fileupload',
+    component: FileuploadView,
   },
   {
-    path: '/registerPage',
-    name: 'registerPage',
-    component: RegisterPage,
+    path: '/register',
+    name: 'register',
+    component: RegisterView,
   },
   {
-    path: '/logoutPage',
-    name: 'logoutPage',
+    path: '/logout',
+    name: 'logout',
     component: LogoutComponent,
     meta:{
       requestAuth: true
     }
   },
   {
-    path: '/imageuploadPage',
-    name: 'imageuploadPage',
-    component: ImageuploadPage,
+    path: '/imageupload',
+    name: 'imageupload',
+    component: ImageuploadView,
   },
   {
-    path: '/commentPage',
-    name: 'commentPage',
-    component: CommentPage,
+    path: '/comment',
+    name: 'comment',
+    component: CommentView,
   },
   {
-    path: '/mapPage',
-    name: 'mapPage',
-    component: MapPage,
+    path: '/map',
+    name: 'map',
+    component: MapView,
+  },
+  {
+    path: '/lifecycle',
+    name: 'lifecycle',
+    component: LifecycleView,
   },
 ];
 

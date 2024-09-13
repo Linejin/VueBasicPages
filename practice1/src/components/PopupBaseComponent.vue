@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="popup-overlay">
+  <div v-if="props.isVisible" class="popup-overlay">
     <div class="popup-content">
       <div class="close-button" @click="closePopup">×</div>
       <slot></slot> <!-- 팝업 내용은 부모 컴포넌트에서 전달 가능 -->

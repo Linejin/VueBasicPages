@@ -1,26 +1,26 @@
 <template>
-    <div id="comment-wrapper">
-        <form>
-          <div class="comment-container">
-            <div class="comment-add-container">
-              <input class="comment-add-input" @input="handleCommentChange" type="text" placeholder="댓글을 입력해주세요.">
-              <button class="comment-add-button" @click="handleCreateComment">댓글추가</button>
-            </div>
-            <div class="comment-list-container">
-              <div v-for="comment in comment_list" :key="comment.id" class="comment-item-container">
-                <input 
-                  class="comment-list"
-                  @input="(event) => handleEditComment(event, comment)" 
-                  type="text"
-                  :value="comment.editText"
-                  :placeholder=comment.comment>
-                  <button class="comment-item-button" @click="(event) => handleUpdateComment(event, comment)">수정</button>
-                  <button class="comment-item-button" @click="(event) => handleDeleteComment(event, comment)">삭제</button>
-              </div>
-            </div>
+  <div id="comment-wrapper">
+    <form>
+      <div class="comment-container">
+        <div class="comment-add-container">
+          <input class="comment-add-input" @input="handleCommentChange" type="text" placeholder="댓글을 입력해주세요.">
+          <button class="comment-add-button" @click="handleCreateComment">댓글추가</button>
+        </div>
+        <div class="comment-list-container">
+          <div v-for="comment in comment_list" :key="comment.id" class="comment-item-container">
+            <input 
+              class="comment-list"
+              @input="(event) => handleEditComment(event, comment)" 
+              type="text"
+              :value="comment.editText"
+              :placeholder=comment.comment>
+              <button class="comment-item-button" @click="(event) => handleUpdateComment(event, comment)">수정</button>
+              <button class="comment-item-button" @click="(event) => handleDeleteComment(event, comment)">삭제</button>
           </div>
-        </form>
-    </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup>
