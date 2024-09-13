@@ -4,7 +4,7 @@
           <div class="comment-container">
             <div class="comment-add-container">
               <input class="comment-add-input" @input="handleCommentChange" type="text" placeholder="댓글을 입력해주세요.">
-              <button class="comment-add-button" @click="save">댓글추가</button>
+              <button class="comment-add-button" @click="handleCreateComment">댓글추가</button>
             </div>
             <div class="comment-list-container">
               <div v-for="comment in comment_list" :key="comment.id" class="comment-item-container">
@@ -23,12 +23,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'CommentPage',
-};
-</script>
-
 <script setup>
 import { ref,onMounted } from 'vue';
 import { fetchComment, createComment, updateComment, deleteComment } from '@/utils/comment'
@@ -39,6 +33,13 @@ const current_comment_input = ref("");
 function handleCommentChange(event){
   current_comment_input.value = event.target.value;
 }
+
+const handleCreateComment = async (event) => {
+  event.preventDefault();
+  const newComment = await createComment(current_comment_input.value);
+  current_comment_input.value = "";
+  comment_list.value.push(newComment)
+};
 
 async function handleUpdateComment(event, comment){
   event.preventDefault();
@@ -57,17 +58,9 @@ async function handleEditComment(event, comment){
   comment.editText = event.target.value;
 }
 
-const save = async (event) => {
-  event.preventDefault();
-  const newComment = await createComment(current_comment_input.value);
-  current_comment_input.value = "";
-  comment_list.value.push(newComment)
-};
-
 onMounted(async ()=>{
   comment_list.value = await fetchComment()
 });
-
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import axios from 'axios';
-import PopupTest from '../views/PopupParent.vue'
+import PopupParent from '../views/PopupParent.vue'
 import CountingBtn from '../views/CountingBtn.vue'
 import HomePage from '../views/HomePage.vue'
 import InputBoxes from '../views/InputBoxes.vue'
@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/popup',
     name: 'popup',
-    component: PopupTest,
+    component: PopupParent,
   },
   {
     path: '/countingBtn',

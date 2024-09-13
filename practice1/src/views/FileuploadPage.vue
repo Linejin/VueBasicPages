@@ -15,12 +15,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'FileuploadPage',
-};
-</script>
-
 <script setup>
 import { ref,onMounted } from 'vue';
 import axios from 'axios'

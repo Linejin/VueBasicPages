@@ -11,12 +11,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'CountingBtn'
-};
-</script>
-
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios'

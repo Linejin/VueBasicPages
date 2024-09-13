@@ -28,12 +28,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'InputBoxes',
-};
-</script>
-
 <script setup>
 import { ref,onMounted } from 'vue';
 import axios from 'axios'

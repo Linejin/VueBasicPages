@@ -10,20 +10,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import PopupBaseComponent from '../components/PopupBaseComponent.vue';
+import {ref} from 'vue';
 
-export default {
-  name: 'PopupTest',
-  components: {
-    PopupBaseComponent
-  },
-  data() {
-    return {
-      showPopup: false
-    };
-  }
-};
+const showPopup = ref(false)
+
 </script>
 
 <style>

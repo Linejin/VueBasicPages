@@ -13,12 +13,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ImageuploadPage',
-};
-</script>
-
 <script setup>
 import { ref,onBeforeMount } from 'vue';
 import axios from 'axios'
