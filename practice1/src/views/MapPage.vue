@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import KakaoMap from "../components/KakaoMap.vue"
+import KakaoMap from "../components/KakaoMap copy.vue"
 export default {
   name: 'MapPage',
   components: {

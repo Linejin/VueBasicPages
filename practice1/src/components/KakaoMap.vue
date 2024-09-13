@@ -35,6 +35,9 @@ export default ({
             console.log(error);
         }
     },
+    beforeMount(){
+        this.loadScript();
+    },
     methods: {
         async loadMap(){
             /* global map */
@@ -84,21 +87,15 @@ export default ({
             clusterer.addMarker(marker);
         },
         async fetchData(){
-            try {
-                const response = await axios.get('http://127.0.0.1:8000/api/map/marker/1/');
-                return {"latitude": response.data.latitude, "longitude": response.data.longitude};
-            } catch (error) {
-                return null;
-            }
+            return await axios.get('http://127.0.0.1:8000/api/map/marker/1/')
+                .then((response) => { return {"latitude": response.data.latitude, "longitude": response.data.longitude}})
+                .catch((response) => {return null});
         },
         async updateData(latitude, longitude){
-            try {
-                const data = {"latitude": latitude, "longitude": longitude};
-                const response = await axios.put('http://127.0.0.1:8000/api/map/marker/1/', data);
-                return true;
-            } catch (error) {
-                return false;
-            }
+            const data = {"latitude": latitude, "longitude": longitude};
+            return await axios.put('http://127.0.0.1:8000/api/map/marker/1/', data)
+                .then((response) => {return true})
+                .catch((response) => {return false});
         }
     },
 })

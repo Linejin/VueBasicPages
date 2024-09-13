@@ -20,7 +20,7 @@ export default {
 </script>
 
 <script setup>
-import { ref,onMounted } from 'vue';
+import { ref,onBeforeMount } from 'vue';
 import axios from 'axios'
 
 const error_state = ref(null);
@@ -71,7 +71,7 @@ async function updateData(){
   }
 }
 
-onMounted(()=>{
+onBeforeMount(()=>{
   fetchData()
 });
 
