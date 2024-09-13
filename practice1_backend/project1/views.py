@@ -20,57 +20,63 @@ class BoxesListCreate(generics.ListCreateAPIView):
 class BoxesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Boxes.objects.all()
     serializer_class = BoxesSerializer
-    
-
-from .models import Member
-from .serializers import MemberSerializer
-
-class MemberListCreate(generics.ListCreateAPIView):
-    queryset = Member.objects.all()
-    serializer_class = MemberSerializer
-
-class MemberRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Member.objects.all()
-    serializer_class = MemberSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Member
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 class MemberRegisterView(APIView):
     def post(self, request, *args, **kwargs):
-        name = request.data.get('name')
+        username = request.data.get('username')
         password = request.data.get('password')
         
-        if not name or not password:
-            return Response({"detail": "Name and password are required."}, status=status.HTTP_400_BAD_REQUEST)
+        if not username or not password:
+            return Response({"detail": "username and password are required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if Member.objects.filter(name=name).exists():
-            return Response({"detail": "This name already exists."}, status=status.HTTP_400_BAD_REQUEST)
+        if User.objects.filter(username=username).exists():
+            return Response({"detail": "This username already exists."}, status=status.HTTP_400_BAD_REQUEST)
         
-        member = Member(name=name, password=password)
-        member.save()
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
         return Response({"detail": "Sign Up successful."}, status=status.HTTP_201_CREATED)
 
 class MemberLoginView(APIView):
     def post(self, request, *args, **kwargs):
-        name = request.data.get('name')
+        username = request.data.get('username')
         password = request.data.get('password')
         
-        if not name or not password:
+        if not username or not password:
             return Response({"detail": "Name and password are required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            member = Member.objects.get(name=name)
-        except Member.DoesNotExist:
-            return Response({"detail": "Member not found."}, status=status.HTTP_404_NOT_FOUND)
+        user = authenticate(request, username=username, password=password)
         
-        if member.password != password:
-            return Response({"detail": "Invalid password."}, status=status.HTTP_401_UNAUTHORIZED)
+        if user is None:
+            return Response({"detail": "Invalid Authenticated."}, status=status.HTTP_404_NOT_FOUND)
         
+        login(request, user)
         return Response({"detail": "Authentication successful."}, status=status.HTTP_200_OK)
-    
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+@api_view(['GET'])
+def check_auth(request):
+    if request.user.is_authenticated:
+        return Response({"detail": "User is authenticated."}, status=status.HTTP_200_OK)
+    return Response({"detail": "User is not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['POST'])
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)  # 세션을 종료하여 로그아웃 처리
+        return Response({"detail": "Logout successful."}, status=status.HTTP_200_OK)
+    return Response({"detail": "User is not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
+
 #file uploader
 from django.http import Http404, HttpResponse
 import mimetypes
@@ -162,3 +168,15 @@ class MapMarkerLocationListCreate(generics.ListCreateAPIView):
 class MapMarkerLocationRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = MapMarkerLocation.objects.all()
     serializer_class = MapMarkerLocationSerializer
+    
+from django.contrib.sessions.models import Session
+from django.http import JsonResponse
+
+# 모든 사용자 로그아웃 함수
+def force_logout_all_users():
+    Session.objects.all().delete()
+
+# 뷰에서 호출하는 예시
+def force_logout_all_view(request):
+    force_logout_all_users()  # 모든 사용자 로그아웃
+    return JsonResponse({"detail": "All users are now logged out"})

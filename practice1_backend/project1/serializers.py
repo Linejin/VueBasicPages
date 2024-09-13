@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Post
 from .models import Boxes
 from .models import UploadedFile
-from .models import Member
 from .models import UploadedProFileImage
 from .models import Comment
 from .models import MapMarkerLocation
@@ -20,11 +19,6 @@ class BoxesSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UploadedFile
-        fields = '__all__'
-        
-class MemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Member
         fields = '__all__'
         
 class ProfileImageSerializer(serializers.ModelSerializer):

@@ -23,15 +23,6 @@ class UploadedFile(models.Model):
 
     def __str__(self):
         return self.file.name, self.file.verbose_name
-
-class Member(models.Model):
-    name = models.TextField(max_length=30)
-    password = models.TextField(max_length=30)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name, self.password
     
 class UploadedProFileImage(models.Model):
     file = models.FileField(upload_to='uploads/profile/')

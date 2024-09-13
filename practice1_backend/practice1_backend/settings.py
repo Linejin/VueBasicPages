@@ -43,14 +43,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'practice1_backend.middleware.CsrfHeaderMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'practice1_backend.urls'
@@ -127,8 +128,33 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True  # 인증 정보(쿠키 등)를 포함한 요청 허용
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'X-CSRFToken',
+    'sessionid',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Vue 앱이 실행 중인 도메인
+]
 
 import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# 세션 백엔드 설정 (기본값은 데이터베이스 사용)
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 데이터베이스를 사용
+
+# 세션 만료 시간 (기본값 120분)
+SESSION_COOKIE_AGE = 120 * 60  # 2시간
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']  # Vue.js 개발 서버 주소
+CORS_ALLOWED_ORIGINS = ['http://localhost:8080']  # Vue.js 개발 서버 주소
+# CSRF_COOKIE_NAME = 'X-CSRFToken'
+
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
