@@ -2,15 +2,23 @@
     <div id="comment-wrapper">
         <form>
           <div class="comment-container">
-            <div>
+            <div class="comment-add-container">
               <input class="comment-add-input" @input="handleCommentChange" type="text" placeholder="댓글을 입력해주세요.">
               <button class="comment-add-button" @click="save">댓글추가</button>
             </div>
             <div class="comment-list-container">
-              <p v-for="commnet in comment_list" :key="commnet.id" class="comment-list">{{commnet.comment}}</p>
+              <div v-for="comment in comment_list" :key="comment.id" class="comment-item-container">
+                <input 
+                  class="comment-list"
+                  @input="(event) => handleEditComment(event, comment)" 
+                  type="text"
+                  :value="comment.editText"
+                  :placeholder=comment.comment>
+                  <button class="comment-item-button" @click="(event) => handleUpdateComment(event, comment)">수정</button>
+                  <button class="comment-item-button" @click="(event) => handleDeleteComment(event, comment)">삭제</button>
+              </div>
             </div>
           </div>
-          <p>{{message}}</p>
         </form>
     </div>
 </template>
@@ -23,49 +31,41 @@ export default {
 
 <script setup>
 import { ref,onMounted } from 'vue';
-import axios from 'axios'
+import { fetchComment, createComment, updateComment, deleteComment } from '@/utils/comment'
 
-const loading = ref(true)
 const comment_list = ref([]);
 const current_comment_input = ref("");
-const message = ref("");
-const error_state = ref(null);
 
 function handleCommentChange(event){
   current_comment_input.value = event.target.value;
 }
 
-const save = (event) => {
+async function handleUpdateComment(event, comment){
   event.preventDefault();
-  updateData();
+  const updatedData = await updateComment(comment.id, comment.editText);
+  comment.comment = updatedData.comment;
+  comment.editText = null
+}
+
+async function handleDeleteComment(event, comment){
+  event.preventDefault();
+  await deleteComment(comment.id);
+  comment_list.value = comment_list.value.filter((element)=>element.id != comment.id)
+}
+
+async function handleEditComment(event, comment){
+  comment.editText = event.target.value;
+}
+
+const save = async (event) => {
+  event.preventDefault();
+  const newComment = await createComment(current_comment_input.value);
+  current_comment_input.value = "";
+  comment_list.value.push(newComment)
 };
 
-async function fetchData(){
-  try {
-    const response = await axios.get('http://127.0.0.1:8000/api/comment/');
-    comment_list.value = response.data;
-    message.value = "completed get comment_list";
-  } catch (error) {
-    error_state.value = error;
-  } 
-}
-
-async function updateData(){
-  try {
-    const data = {"comment": current_comment_input.value};
-    const response = await axios.post('http://127.0.0.1:8000/api/comment/', data);
-    fetchData();
-    message.value = "completed post comment : " + current_comment_input.value;
-    current_comment_input.value = "";
-  } catch (error) {
-    if(error.response.status == 400)
-      message.value = error.response.data.error;
-      error_state.value = error;
-  } 
-}
-
-onMounted(()=>{
-  fetchData()
+onMounted(async ()=>{
+  comment_list.value = await fetchComment()
 });
 
 </script>
@@ -84,12 +84,14 @@ onMounted(()=>{
 
 .comment-container{
   width: 600px;
+  text-align: center;
 }
 
 .comment-container .comment-add-input{
   display: inline-block;
   height: 20px;
   padding: 10px 10px;
+  margin: 5px;
   vertical-align: middle;
   border: 1px solid #dddddd;
   width: 60%;
@@ -97,9 +99,10 @@ onMounted(()=>{
   text-align: end;
 }
 
-.comment-container .comment-add-button {
+.comment-add-button {
   display: inline-block;
   padding: 10px 20px;
+  width: 150px;
   color: #fff;
   vertical-align: middle;
   background-color: #999999;
@@ -108,9 +111,10 @@ onMounted(()=>{
   font-size: 15px;
   margin-left: 10px;
 }
-
 .comment-container .comment-list-container{
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .comment-container .comment-list {
@@ -129,6 +133,22 @@ onMounted(()=>{
   display: flex;
   align-items: center;      /* 상하 가운데 정렬 */
   justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+.comment-add-container .comment-item-container{
+  display: flex;
+}
+.comment-item-button{
+  display: inline-block;
+  padding: 10px 20px;
+  width: 70px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  border: hidden;
+  font-size: 15px;
+  margin-left: 10px;
 }
 
 </style>
