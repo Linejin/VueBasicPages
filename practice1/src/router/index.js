@@ -1,52 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import axios from 'axios';
-import PopupParent from '@/views/PopupParent'
-import CountingView from '@/views/CountingView'
-import HomeView from '@/views/HomeView'
-import InputBoxesView from '@/views/InputBoxesView'
-import FileuploadView from '@/views/FileuploadView'
-import RegisterView from '@/views/RegisterView'
-import ImageuploadView from '@/views/ImageuploadView'
-import CommentView from '@/views/CommentView'
-import MapView from '@/views/MapView'
-import LifecycleView from '@/views/LifecycleView'
-import LogoutComponent from '@/components/LogoutComponent';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('@/views/HomeView'),
   },
   {
     path: '/popup',
     name: 'popup',
-    component: PopupParent,
+    component: () => import('@/views/PopupParent'),
   },
   {
     path: '/counting',
     name: 'counting',
-    component: CountingView,
+    component: () => import('@/views/CountingView'),
   },
   {
     path: '/inputBoxes',
     name: 'inputBoxes',
-    component: InputBoxesView,
+    component: () => import('@/views/InputBoxesView'),
   },
   {
     path: '/Fileupload',
     name: 'Fileupload',
-    component: FileuploadView,
+    component: () => import('@/views/FileuploadView'),
   },
   {
     path: '/register',
     name: 'register',
-    component: RegisterView,
+    component: () => import('@/views/RegisterView'),
   },
   {
     path: '/logout',
     name: 'logout',
-    component: LogoutComponent,
+    component: () => import('@/components/LogoutComponent'),
     meta:{
       requestAuth: true
     }
@@ -54,22 +43,22 @@ const routes = [
   {
     path: '/imageupload',
     name: 'imageupload',
-    component: ImageuploadView,
+    component: () => import('@/views/ImageuploadView'),
   },
   {
     path: '/comment',
     name: 'comment',
-    component: CommentView,
+    component: () => import('@/views/CommentView'),
   },
   {
     path: '/map',
     name: 'map',
-    component: MapView,
+    component: () => import('@/views/MapView'),
   },
   {
     path: '/lifecycle',
     name: 'lifecycle',
-    component: LifecycleView,
+    component: () => import('@/views/LifecycleView'),
   },
 ];
 
