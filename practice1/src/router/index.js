@@ -23,8 +23,8 @@ const routes = [
     component: () => import('@/views/InputBoxesView'),
   },
   {
-    path: '/Fileupload',
-    name: 'Fileupload',
+    path: '/fileupload',
+    name: 'fileupload',
     component: () => import('@/views/FileuploadView'),
   },
   {

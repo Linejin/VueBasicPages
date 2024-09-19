@@ -1,48 +1,45 @@
 <template>
   <div id="navbar_container">
     <div id="navbar_main">
-      <router-link class="router-link-style" v-for="link in routing_links" :key="link.to" :to="link.to">
-        {{link.text}}
+      <router-link
+        class="router-link-style"
+        v-for="link in routing_links"
+        :key="link.to"
+        :to="link.to"
+      >
+        {{ link.text }}
       </router-link>
     </div>
-    <router-view class="router-view-style">
-
-    </router-view>
+    <router-view class="router-view-style"> </router-view>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  components: {
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
 <script setup>
-
 const routing_links = [
-  {to:"/", text:"Home"},
-  {to:"/popup", text:"Popup"},
-  {to:"/counting", text:"CountingBtn"},
-  {to:"/inputBoxes", text:"InputBoxes"},
-  {to:"/fileupload", text:"FileuploadPage"},
-  {to:"/register", text:"RegisterPage"},
-  {to:"/imageupload", text:"ImageuploadPage"},
-  {to:"/comment", text:"CommentPage"},
-  {to:"/map", text:"MapPage"},
-  {to:"/lifecycle", text:"LifecyclePage"},
+  { to: { name: "home" }, text: "Home" },
+  { to: { name: "popup" }, text: "Popup" },
+  { to: { name: "inputBoxes" }, text: "InputBoxes" },
+  { to: { name: "fileupload" }, text: "FileuploadPage" },
+  { to: { name: "register" }, text: "RegisterPage" },
+  { to: { name: "imageupload" }, text: "ImageuploadPage" },
+  { to: { name: "comment" }, text: "CommentPage" },
+  { to: { name: "map" }, text: "MapPage" },
+  { to: { name: "lifecycle" }, text: "LifecyclePage" },
 ];
-
-
 </script>
 
 <style>
-#navbar_container{
+#navbar_container {
   display: flex;
   justify-items: center;
 }
-#navbar_main{
+#navbar_main {
   width: 200px;
   display: flex;
   justify-items: center;
@@ -60,7 +57,6 @@ const routing_links = [
   margin-trim: 10px;
   margin: 10px;
   width: 100%;
-
 }
 .router-view-style {
   margin-trim: 10px;
